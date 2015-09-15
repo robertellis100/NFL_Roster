@@ -1,0 +1,10 @@
+.player-card{
+display:inline-block;
+border:solid black 1px;
+text-align: center;
+/*background-image: url("/images/fantasyTemp.png");
+background-repeat: no-repeat;*/
+}
+.container{
+	position: center;
+}
