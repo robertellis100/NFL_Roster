@@ -2,9 +2,37 @@
 display:inline-block;
 border:solid black 1px;
 text-align: center;
+font-size:  75%;
 /*background-image: url("/images/fantasyTemp.png");
 background-repeat: no-repeat;*/
 }
 .container{
-	position: center;
+	/*position: center;*/
+}
+
+.playerImage{
+	height:100px;
+	widows: 100px;;
+}
+#addPlayerBtn{
+	text-align: center;
+}
+
+/*.player-roster{
+	display:inline-block;
+	align-items: center;
+}*/
+.imageWrap {
+	display:inline-block;
+	position:relative;
+}
+
+#removePlayerBtn{
+	position:absolute;
+	left:13px;
+	top:0;
+	width:75%;
+	height:15%;
+	font-size: 80%;
+	font-stretch: expanded;
 }
