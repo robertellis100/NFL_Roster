@@ -4,6 +4,7 @@
   <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
    	<link rel="stylesheet" href="site.css" />
+<link href="http://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css" rel="stylesheet" />
     
   </head>
 
@@ -33,24 +34,27 @@
 					<form id="playerForm">
 						
 						<div class="form-group">
-							<label for="nameInput">Player Name</label>
-							<input id="nameInput" type="text" class="form-control"/>
+							<select id="player-select" autocomplete="off"></select>
+							<!--<label for="nameInput">Player Name</label>-->
+							<!--<input id="nameInput" type="text" class="form-control"/>-->
 						</div>
-						<div class="form-group">
+						<!--<div class="form-group">
 							<label for="positionInput">Player Position</label>
 							<input id="positionInput" type="text" class="form-control"/>
 						</div>
 						<div class="form-group">
 							<label for="numberInput">Player Number</label>
 							<input id="numberInput" type="text" class="form-control"/>
-						</div>
+						</div>-->
 						<span class="btn btn-default" id="addPlayerBtn">Add</span>
 					</form>
 				</div>
 			</div>
 		</div>
 	</div>	
+	
 	<script data-require="jquery@*" data-semver="2.1.4" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
 	<script src="app.js"></script>
   </body>
 
