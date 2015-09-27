@@ -3,10 +3,13 @@ var playersManager = {
   positions:[],
   teams:[]
 };
+// var counterPosition;
+// var counterTeam;
 var allPlayers = {};
 playerService.loadPlayers(function () {
 
-  var players = playerService.getPlayers();
+  //var players = playerService.getPlayers();
+  var players = playerService.getActiveOffensePlayers();
 
   // players.forEach(function (player) {
   //   $('.player-roster').append('<img src="' + player.photo + '"/>')
@@ -21,19 +24,38 @@ playerService.loadPlayers(function () {
     allPlayers[player.id] = player;
     if(playersManager.positions.indexOf(player.position)===-1){
       playersManager.positions.push(player.position);
+      //counterPosition++;
     } 
     if(playersManager.teams.indexOf(player.pro_team)===-1){
       playersManager.teams.push(player.pro_team);
+      //counterTeam++;
     }
+    
     $("#player-select").append('<option value="'+player.id+'">'+player.lastname+ ', ' + player.firstname+'</option>');
-  })
+    
+  });
+  
+  // playersManager.teams.forEach(function(name){
+  //   $("#team-select").append('<option value="'+playersManager.teams.indexOf(name)+'">'+playersManager.teams.name+'</option>');
+  //   $("#position-select").append('<option value="'+playersManager.positions.indexOf(name)+'">'+playersManager.positions.name+'</option>');
+  // })
+  
+ for (var i=0;i<playersManager.teams.length;i++){
+   $("#team-select").append('<option value="'+i+'">'+playersManager.teams[i]+'</option>');
+ }; 
+ for (var i=0;i<playersManager.positions.length;i++){
+   $("#position-select").append('<option value="'+i+'">'+playersManager.positions[i]+'</option>');
+ }; 
   
    $( "#player-select" ).select2();   
    //https://select2.github.io/examples.html
+   $( "#team-select" ).select2();
+   $( "#position-select" ).select2();
+   
 
 $('#addPlayerBtn').on('click',function(){
     var playerId = $('#player-select').val();
-    var playerToAdd = allPlayers[playerId];
+    var playerToAdd = allPlayers["QB"];
     $('.player-roster').append('<img src="' + playerToAdd.photo + '"/>')
 });
 
@@ -56,17 +78,53 @@ function PlayerService() {
     getPlayers: function () {
       return _players.slice();
     },
+    getActivePlayers: function () {
+      var filteredTeam = _players.filter(function(player) {
+        if(player.pro_status === "A"){      
+          return true;
+        }
+      });
+      return filteredTeam;
+    },
+    getActiveOffensePlayers: function () {
+      return _players.filter(function(player) {
+        if(player.pro_status === "A" && player.position === "QB" || player.position === "RB" || player.position === "WR" || player.position === "TE"){      
+          return true;
+        }
+      });
+    },    
+    
     getPlayersByTeam: function (team) {
       var requestedTeam = _players.filter(function (player) {
         if (player.pro_team === team) {
           return true;
         }
-      })
+      });
+      return requestedTeam;
+    },
+    
+    getActiveOffensePlayersByTeam: function(team){
+        //var requestedTeam = 
+        this.getActiveOffensePlayers().filter(function(player) {
+          if (player.pro_team === team) {
+            return true;
+          }
+        });
+      //return requestedTeam;
+    },
+    
+    getActiveOffensePlayersByPosition: function(position){
+        var requestedTeam = this.getActiveOffensePlayers().filter(function(player) {
+          if (player.position === position) {
+            return true;
+          }
+        });
       return requestedTeam;
     }
-
+    
   }
 }
+    
 			
    
       
